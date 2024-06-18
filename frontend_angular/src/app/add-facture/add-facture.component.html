@@ -1,0 +1,147 @@
+<style>
+    .invoice-title {
+        margin-top: 20px;
+    }
+    .invoice-header, .invoice-footer {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+    }
+    .invoice-details {
+        margin-top: 30px;
+    }
+    .total-amount {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+</style>
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card" style="margin-top: 50px;">
+        <div class="card-body">
+            <div *ngIf="role === 'admin'">
+                <h2 class="mb-4">Add Facture</h2>
+                <form [formGroup]="factureForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="numero" class="form-label">Numero:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input id="numero" class="form-control" formControlName="numero" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="dateEmission" class="form-label">Date Emission:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input id="dateEmission" type="date" class="form-control" formControlName="date_emission" required>
+                            <small class="text-muted">Note: You are 1 hour ahead of server time.</small>
+                            <div class="invalid-feedback">
+                                Please provide a valid date.
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="client" class="form-label">Client:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input id="client" type="text" class="form-control" formControlName="client" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid client.
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="montant" class="form-label">Montant:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input id="montant" class="form-control" formControlName="montant" type="numero" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid montant.
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="description" class="form-label">Description:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea id="description" class="form-control" formControlName="description" type="text" required></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a valid description.
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="submit" style="background-color: #205067;border-color: #205067;" class="btn btn-primary me-2">Save</button>
+                                <button type="submit" style="background-color: #417690; border-color: #417690;" class="btn btn-success me-2" (click)="onSaveAndAddAnother()">Save and add another</button>
+                                <button type="submit" style="background-color: #417690; border-color: #417690;" class="btn btn-success me-2" (click)="onSaveAndContinueEditing()">Save and continue editing</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="role === 'user'">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-body">
+                            <div *ngIf="factures && factures.length > 0; else noFactures">
+                                <div *ngFor="let facture of factures">
+                                    <div class="row invoice-header">
+                                        <div class="col-sm-6">
+                                            <h2 class="invoice-title">Facture</h2>
+                                        </div>
+                                        <div class="col-sm-5 text-right">
+                                            <h5><strong>Numero:</strong> {{ facture.numero }}</h5>
+                                            <h5><strong>Date Emission:</strong> {{ facture?.date_emission }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-6">
+                                            <h5><strong>Facturé à: </strong>{{ facture.client }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="invoice-details mt-4">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Description</th>
+                                                    <th class="text-right">Montant</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ facture.description }}</td>
+                                                    <td class="text-right">{{ facture.montant }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-6 text-right">
+                                            <h4 class="total-amount">Total: {{ facture.montant }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-template #noFactures>
+                                <div class="text-center">
+                                    <h4>Pas de factures</h4>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+      <div class="card-body">
+        <!-- User Section: Add transfert de ligne -->
+        <div *ngIf="role === 'user'">
+          <h2 class="mb-4">Add transfert de ligne</h2>
+          <form [formGroup]="transfertLigneForm" (ngSubmit)="addTransfertLigne()" class="needs-validation" novalidate>
+            <div class="row mb-4">
+              <div class="col-md-2">
+                <label for="numero" class="form-label">Numero ligne:</label>
+              </div>
+              <div class="col-md-10">
+                <input id="numero" class="form-control" formControlName="numero_de_ligne" required>
+                <div *ngIf="transfertLigneForm.get('numero_de_ligne')!.invalid && (transfertLigneForm.get('numero_de_ligne')!.dirty || transfertLigneForm.get('numero_de_ligne')!.touched)" class="text-danger">
+                  Numero de ligne is required.
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row mb-4">
+              <div class="col-md-2">
+                  <label  class="form-label">Date transfert:</label>
+              </div>
+              <div class="col-md-10">
+                  <input id="dateEmission" type="date" class="form-control" formControlName="dateEmission" required>
+                  <small class="text-muted">Note: You are 1 hour ahead of server time.</small>
+                  <div class="invalid-feedback">
+                      Please provide a valid date.
+                  </div>
+              </div>
+          </div>
+          
+          
+     
+      <hr>
+            <div class="row mb-4">
+              <div class="col-md-2">
+                <label for="ancienne" class="form-label">Ancienne Adresse:</label>
+              </div>
+              <div class="col-md-10">
+                <input id="ancienne" class="form-control" formControlName="ancienne_addresse" required>
+                <div *ngIf="transfertLigneForm.get('ancienne_addresse')!.invalid && (transfertLigneForm.get('ancienne_addresse')!.dirty || transfertLigneForm.get('ancienne_addresse')!.touched)" class="text-danger">
+                  Ancienne adresse is required.
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row mb-4">
+              <div class="col-md-2">
+                <label for="nouvelle" class="form-label">Nouvelle Adresse:</label>
+              </div>
+              <div class="col-md-10">
+                <input id="nouvelle" class="form-control" formControlName="nouvelle_addresse" required>
+                <div *ngIf="transfertLigneForm.get('nouvelle_addresse')!.invalid && (transfertLigneForm.get('nouvelle_addresse')!.dirty || transfertLigneForm.get('nouvelle_addresse')!.touched)" class="text-danger">
+                  Nouvelle adresse is required.
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row mb-4">
+              <div class="col-md-2">
+                  <label  class="form-label">Statut:</label>
+              </div>
+              <div class="col-md-10">
+                  <select class="form-select" data-mdb-select-init>
+                      <option selected>En attente</option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                  </select>
+              </div>
+              
+          </div><hr>
+            
+            <div class="d-flex justify-content-center">
+              <div class="card">
+                <div class="card-body">
+                  <button type="submit" style="background-color: #205067; border-color: #205067;" class="btn btn-primary me-2">Save</button>
+                  <button type="button" style="background-color: #417690; border-color: #417690;" class="btn btn-success me-2">Save and add another</button>
+                  <button type="button" style="background-color: #417690; border-color: #417690;" class="btn btn-success me-2">Save and continue editing</button>
+                </div>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+        <!-- Admin Section: List and manage transfert de lignes -->
+        <div *ngIf="role === 'admin'" class="container mt-5">
+          <h3 >Transfert de lignes</h3>
+
+          <div class="row">
+            <div class="panel">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-sm-3 col-xs-12">
+                  </div>
+                  <div class="col-sm-9 col-xs-12 text-right"></div>
+                </div>
+              </div>
+              <div class="panel-body table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Numero ligne</th>
+                      <th>Date transfert</th>
+                      <th>Client</th>
+                      <th>Ancienne adresse</th>
+                      <th>Nouvelle adresse</th>
+                      <th>Statut</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let transfert of transfertLignes">
+                      <td>{{ transfert.numero_de_ligne }}</td>
+                      <td>{{ transfert.date_transfer }}</td>
+                      <td>{{ transfert.user_name }}</td>
+                      <td>{{ transfert.ancienne_addresse }}</td>
+                      <td>{{ transfert.nouvelle_addresse }}</td>
+                      <td>{{ transfert.statut }}</td>
+                      <td>
+                        <ul class="action-list">
+                          <li><a (click)="acceptTransfertLigne(transfert)" data-tip="Accept"><i class="fa fa-check"></i></a></li>
+                          <li><a (click)="refuserTransfertLigne(transfert)" data-tip="Refuse"><i class="fa fa-times"></i></a></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- closing card-body -->
+    </div> <!-- closing card -->
+  </div> <!-- closing container -->
+  

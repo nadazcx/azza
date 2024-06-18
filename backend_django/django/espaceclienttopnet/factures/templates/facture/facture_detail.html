@@ -1,0 +1,16 @@
+
+
+<h1>Détail de la Facture</h1>
+
+
+
+
+
+<h1>{{ facture.description}}</h1>
+<p>{{ facture.date_emission }}</p>
+<a href="{% url 'facture_edit' facture.pk %}" class="btn btn-warning">Edit</a>
+<form action="{% url 'facture_delete' facture.pk %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+

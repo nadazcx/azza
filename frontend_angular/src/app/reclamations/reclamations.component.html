@@ -1,0 +1,139 @@
+<!-- add-facture.component.html -->
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+        <div class="card-body">
+            <div *ngIf="role === 'user'">
+                <h2 class="mb-4">Add Reclamation</h2>
+                <form [formGroup]="reclamationForm" (ngSubmit)="ajouterReclamation()" class="needs-validation" novalidate>
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <label for="numero" class="form-label">Numero:</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input id="numero" class="form-control" formControlName="numero" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <label for="dateEmission" class="form-label">Date <br> reclamation:</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input id="dateEmission" type="date" class="form-control" formControlName="dateEmission" required>
+                            <small class="text-muted">Note: You are 1 hour ahead of server time.</small>
+                            <div class="invalid-feedback">
+                                Please provide a valid date.
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <label for="client" class="form-label">Client:</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input id="client" class="form-control" formControlName="client" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <label for="sujet" class="form-label">Sujet:</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input id="sujet" class="form-control" formControlName="sujet" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="description" class="form-label">Description:</label>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea id="description" class="form-control" formControlName="description" required></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a valid description.
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <label for="Statut" class="form-label">Statut:</label>
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-select" data-mdb-select-init>
+                                <option selected>En attente</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" style="background-color: #417690; border-color: #417690;" class="btn btn-success me-2">Save and add another</button>
+                        <button type="button" style="background-color: #417690; border-color: #417690;" class="btn btn-success me-2">Save and continue editing</button>
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="role === 'admin'">
+                <h3 >Reclamation</h3>
+
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col col-sm-3 col-xs-12"></div>
+                                        <div class="col-sm-9 col-xs-12 text-right"></div>
+                                    </div>
+                                </div>
+                                <div class="panel-body table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Numero</th>
+                                                <th>Date Reclamation</th>
+                                                <th>id</th>
+                                                <th>Sujet</th>
+                                                <th>Description</th>
+                                                <th>Statut</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let reclamation of reclamations">
+                                                <td>{{ reclamation.numero }}</td>
+                                                <td>{{ reclamation.date }}</td>
+                                                <td>{{ reclamation.id }}</td>
+                                                <td>{{ reclamation.sujet }}</td>
+                                                <td>{{ reclamation.description }}</td>
+                                                <td>{{ reclamation.statut }}</td>
+                                                <td>
+                                                    <ul class="action-list">
+                                                        <li>
+                                                            <a data-tip="edit" (click)="accepterReclamation(reclamation)">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-tip="delete" (click)="refuserReclamation(reclamation)">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

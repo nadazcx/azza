@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votre service client</title>
+
+</head>
+
+<body>
+
+  <div style="width: 100%;">
+
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="#" class="active">Particulier</a></li>
+        <li><a href="#" class="active">Professionnel</a></li>
+        <li><a href="#" class="active">Entreprise</a></li>
+        <li><a href="#" style=" margin-left: 760px;">Boutique en ligne</a></li>
+        <li><a href="#">Webmail</a></li>
+      </ul>
+    </nav>
+
+    <div class="card" style="background-color: #fffbf4;">
+      <div class="card-body text-center">
+        <img style="margin-top: -60px;" src="assets/images/topnet.png" alt="Topnet Logo" class="logo">
+        <h5 style="margin-top: -90px; color:#08164f;">Votre service client à portée de main</h5>
+      </div>
+    </div>
+
+    <main>
+      <div class="login-form">
+        <h2>Mon espace</h2>
+        <p class="text-center">Veuillez saisir votre login et mot de passe pour accéder à votre espace</p>
+        
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="mb-3">
+            <input type="text" style="border-radius: 50px;" class="form-control" id="client-code" formControlName="email"
+              required placeholder="Code Client/Email">
+          </div>
+          <div class="mb-3">
+            <input type="password" style="border-radius: 50px;" class="form-control" id="password" formControlName="password"
+              required placeholder="Mot de passe">
+          </div>
+          <button type="submit" class="button">Connect
+            <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+              <path clip-rule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                fill-rule="evenodd"></path>
+            </svg>
+          </button>
+        </form>
+          <br>
+          <div class="d-flex justify-content-between">
+
+            <div>
+              <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
+              <label for="modal-btn">S'inscrire </label>
+
+              <div class="modal">
+                <div>
+
+                  <div>
+                    <div class="row d-flex justify-content-center align-items-center " style="margin-top: 100PX;">
+                      <div class="col-lg-12 col-xl-9">
+                        <div class="card text-black" style="border-radius: 25px;">
+                          <div class="card-body p-md-3">
+                            <div class="row justify-content-center">
+                              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                                <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+                                  <div class="mb-3">
+                                    <input type="text" formControlName="cin" class="form-control" placeholder="CIN"
+                                      required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <input type="text" formControlName="name" class="form-control"
+                                      placeholder="Your Name" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <input type="email" formControlName="email" class="form-control"
+                                      placeholder="Your Email" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <input type="password" formControlName="password" class="form-control"
+                                      placeholder="Password" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <input type="password" formControlName="confirmPassword" class="form-control"
+                                      placeholder="Repeat your password" required>
+                                  </div>
+
+                                  <button type="submit" class="button">REGISTER</button>
+                                </form>
+
+
+                              </div>
+                              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img
+                                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                  class="img-fluid" alt="Sample image">
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        
+      </div>
+      <bR>
+      <h3 style="text-align: center;">Profitez de tous nos services</h3>
+      <div class="services">
+        <ul>
+          <li><a><i class="fas fa-headset icon"></i> Réclamation</a></li>
+          <li><a><i class="fas fa-envelope icon"></i> Gestion des emails</a></li>
+          <li><a><i class="fas fa-exchange-alt icon"></i> Transfert de ligne</a></li>
+          <li><a><i class="fas fa-sync-alt icon"></i> Migration d'offre</a></li>
+          <li><a><i class="fas fa-file-invoice icon"></i> Factures</a></li>
+          <li><a><i class="fas fa-comments icon"></i> Suggestions</a></li>
+        </ul>
+      </div>
+    </main>
+  </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

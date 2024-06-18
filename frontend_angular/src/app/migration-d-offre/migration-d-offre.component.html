@@ -1,0 +1,137 @@
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card">
+    <div class="card-body">
+      
+      <!-- User View -->
+      <div *ngIf="role === 'user'">
+        <h2 class="mb-4">Add migration d'offre</h2>
+        <form [formGroup]="MigrationForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+          
+          <div class="row mb-4">
+            <div class="col-md-2">
+              <label for="numero" class="form-label">Numero offre:</label>
+            </div>
+            <div class="col-md-10">
+              <input id="numero" class="form-control" formControlName="numero" required>
+            </div>
+          </div>
+          
+          <hr>
+          <div class="row mb-4">
+            <div class="col-md-2">
+              <label for="client" class="form-label">Client:</label>
+            </div>
+            <div class="col-md-10">
+              <input id="client" class="form-control" formControlName="client" required>
+              <div class="invalid-feedback">
+                Please provide a valid client.
+              </div>
+            </div>
+          </div>
+          
+          <hr>
+          <div class="row mb-4">
+            <div class="col-md-2">
+              <label for="ancienne-offre" class="form-label">Ancienne offre:</label>
+            </div>
+            <div class="col-md-10">
+              <input id="ancienne-offre" class="form-control" formControlName="ancienneOffre" required>
+            </div>
+          </div>
+          
+          <hr>
+          <div class="row mb-4">
+            <div class="col-md-2">
+              <label for="nouvelle-offre" class="form-label">Nouvelle offre:</label>
+            </div>
+            <div class="col-md-10">
+              <input id="nouvelle-offre" class="form-control" formControlName="nouvelleOffre" required>
+            </div>
+          </div>
+          
+          <hr>
+          <div class="row mb-4">
+            <div class="col-md-2">
+              <label for="statut" class="form-label">Statut:</label>
+            </div>
+            <div class="col-md-10">
+              <select id="statut" class="form-select" formControlName="statut" required>
+                <option value="En attente">En attente</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+            </div>
+          </div>
+          
+          <hr>
+          <div class="d-flex justify-content-center">
+            <div class="card">
+              <div class="card-body">
+                <button type="submit" class="btn btn-primary me-2" style="background-color: #205067; border-color: #205067;">Save</button>
+                <button type="button" class="btn btn-success me-2" style="background-color: #417690; border-color: #417690;">Save and add another</button>
+                <button type="button" class="btn btn-success me-2" style="background-color: #417690; border-color: #417690;">Save and continue editing</button>
+              </div>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+      
+      <!-- Admin View -->
+      <div *ngIf="role === 'admin'">
+        <body>
+        <h3>Liste Migration Offre</h3>
+        <div class="container mt-5">
+          <div class="row">
+              <div >
+                  <div class="panel">
+                      <div class="panel-heading">
+                          <div class="row">
+                              <div class="col col-sm-3 col-xs-12">
+                              </div>
+                              <div class="col-sm-9 col-xs-12 text-right">
+                                  
+                              </div>
+                          </div>
+                      </div>
+                      <div class="panel-body table-responsive">
+                          <table class="table">
+                              <thead>
+                                  <tr>
+                                      <th>Numero offre</th>
+                                      <th>Date Emission</th>
+                                      <th>Client</th>
+                                      <th>Ancienne offre</th>
+                                      <th>nouvelle offre</th> <th>Statut</th>
+                                      <th>Action</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let offre of migrationOffres">
+                                    <td>{{ offre.numerooffre }}</td>
+                                    <td>{{ offre.dateemission }}</td>
+                                    <td>{{ offre.client_name }}</td>
+                                    <td>{{ offre.ancienne_offre }}</td>
+                                    <td>{{ offre.nouvelle_offre }}</td>
+                                    <td>{{ offre.statut }}</td>
+                                    <td>
+                                      <ul class="action-list">
+                                        <li><a  data-tip="edit" (click)="accepterOffre(offre)"><i class="fa fa-edit"></i></a></li>
+                                        <li><a data-tip="delete" (click)="refuserOffre(offre)"><i class="fa fa-trash"></i></a></li>
+                                      </ul>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                          </table>
+                      </div>
+                   
+                  </div>
+              </div>
+          </div>
+      </div>
+     </body></div>
+      
+    </div>
+  </div>
+</div>

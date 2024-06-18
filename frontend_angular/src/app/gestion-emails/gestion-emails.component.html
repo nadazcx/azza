@@ -1,0 +1,126 @@
+<!-- add-facture.component.html -->
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+        <div class="card-body">
+            <div *ngIf="role === 'user'">
+                <h2 class="mb-4">Add gestion email</h2>
+                <form [formGroup]="emailsForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+            
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="destinataire" class="form-label">Adresse:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input id="destinataire" class="form-control" formControlName="addresse" required>
+                        </div>
+                    </div>
+            
+                    <hr>
+            
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="sujet" class="form-label">Email de récupération :</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input id="sujet" class="form-control" formControlName="emailRecuperation" required>
+                        </div>
+                    </div>
+            
+                    <hr>
+            
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="messages" class="form-label">Quota utilisé:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea id="messages" class="form-control" formControlName="messages" required></textarea>
+                        </div>
+                    </div>
+            
+                    <hr>
+            
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <label for="statut" class="form-label">Statut:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="form-select" formControlName="status">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+            
+                    <hr>
+            
+                    <div class="d-flex justify-content-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="submit" style="background-color: #205067; border-color: #205067;"
+                                    class="btn btn-primary me-2">Save</button>
+                                <button type="button" style="background-color: #417690; border-color: #417690;"
+                                    class="btn btn-success me-2">Save and add another</button>
+                                <button type="button" style="background-color: #417690; border-color: #417690;"
+                                    class="btn btn-success me-2">Save and continue editing</button>
+                            </div>
+                        </div>
+                    </div>
+            
+                </form>
+            </div>
+            <body>
+                <div *ngIf="role === 'admin'">
+                    <div class="container mt-5">
+                        <div class="row">
+                            <div>
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col col-sm-3 col-xs-12">
+                                            </div>
+                                            <div class="col-sm-9 col-xs-12 text-right">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Adresse</th>
+                                                    <th>Email de récupération</th>
+                                                    <th>Quota utilisé</th>
+                                                    <th>Statut</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let email of emails">
+                                                    <td>{{ email.addresse }}</td>
+                                                    <td>{{ email.emailRecuperation }}</td>
+                                                    <td>{{ email.messages }}</td>
+                                                    <td>{{ email.status }}</td>
+                                                    <td>{{ email.adminResulat }}</td>
+                                                    
+                                                    <td>
+                                                        <ul class="action-list">
+                                                            <li><a (click)="acceptEmail(email.id)" data-tip="edit"><i
+                                                                        class="fa fa-edit"></i></a></li>
+                                                            <li><a (click)="refuseEmail(email.id)" data-tip="delete"><i
+                                                                        class="fa fa-trash"></i></a></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            </body>
+        </div>
+    </div>
+</div>

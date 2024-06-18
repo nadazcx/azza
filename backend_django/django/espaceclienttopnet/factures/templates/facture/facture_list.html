@@ -1,0 +1,13 @@
+
+
+<h1>les factures</h1>
+<a href="{% url 'facture_new' %}" class="btn btn-primary mb-3">Create New facture</a>
+<ul>
+    {% for facture in factures %}
+    <li>
+       {{ facture.description }}
+    </li>
+    
+    <h1> {{ facture.date_emission }}</h1>
+    {% endfor %}
+</ul>
